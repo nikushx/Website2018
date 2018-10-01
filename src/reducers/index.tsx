@@ -1,3 +1,3 @@
-import auth from './auth';
+import sendCommand from './sendCommand';
 
-export { auth };
+export { sendCommand };

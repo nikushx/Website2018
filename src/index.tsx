@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 
 import AppComponent from './components/App';
 import configureStore, { history } from './store';
+import './styles/index.css';
 
 const store = configureStore();
 

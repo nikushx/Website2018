@@ -1,13 +1,13 @@
 import * as React from 'react';
 
 import Routes from '../../Routes';
-import Navbar from '../Navbar';
+import CMDLine from '../CMDLine';
 
 class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Navbar />
+        <CMDLine />
         <Routes />
       </div>
     );

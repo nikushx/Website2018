@@ -1,3 +1,4 @@
+/*
 import { ILogout } from '../../actions/auth';
 import * as actionTypes from '../../constants/actionTypes';
 import { AuthState } from '../../meta/types/Store';
@@ -14,3 +15,4 @@ const auth = (state: AuthState = INITIAL_STATE, action: ILogout) => {
 };
 
 export default auth;
+*/
