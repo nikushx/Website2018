@@ -1,16 +1,25 @@
 import * as React from 'react';
-import IntroText from '../../components/common/IntroText';
-import LoggedCommand from '../../components/common/LoggedCommand';
+import { StateType } from 'typesafe-actions';
+import rootReducer from '../store/root-reducer';
+import { cmdActions, CMDAction } from '../store/cmd';
+import IntroText from '../components/common/IntroText';
+import LoggedCommand from '../components/common/LoggedCommand';
+import { connect } from 'react-redux';
+import { Dispatch, bindActionCreators } from 'redux';
 
 const cmdWindowStyles: React.CSSProperties = {
   padding: '10px'
+}
+
+export type Props = {
+  onIncrement: () => any;
 }
 
 type State = {
   log: string[];
 };
 
-class HomePage extends React.Component<object, State> {
+class IHomePage extends React.Component<Props, State> {
   state = { log: [] }
 
   componentDidMount() {
@@ -34,7 +43,7 @@ class HomePage extends React.Component<object, State> {
   }
 
   render() {
-
+    console.log(this.props);
     return (
       <div style={cmdWindowStyles}>
         <IntroText>Nikush Dalia</IntroText>
@@ -53,4 +62,19 @@ class HomePage extends React.Component<object, State> {
   }
 }
 
-export default HomePage;
+type RootState = StateType<typeof rootReducer>;
+type RootAction = CMDAction;
+// type RootAction = ReactRouterAction | CountersAction;
+
+const mapStateToProps = (state: RootState) => ({
+  testProp: state.cmd.reduxCounter
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<RootAction>) => bindActionCreators({
+  onIncrement: cmdActions.add,
+}, dispatch);
+
+export const HomePage = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(IHomePage);

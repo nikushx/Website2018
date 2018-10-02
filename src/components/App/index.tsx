@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import Routes from '../../Routes';
+import { HomePage } from '../../pages';
 import CMDLine from '../CMDLine';
 
 class App extends React.Component {
@@ -8,7 +8,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <CMDLine />
-        <Routes />
+        <HomePage />
       </div>
     );
   }
