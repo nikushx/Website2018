@@ -3,47 +3,28 @@ import { StateType } from 'typesafe-actions';
 import rootReducer from '../store/root-reducer';
 import { cmdActions, CMDAction } from '../store/cmd';
 import IntroText from '../components/common/IntroText';
-import LoggedCommand from '../components/common/LoggedCommand';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
+import { LoggedCommand } from 'src/store/cmd/reducer';
+import Command from 'src/components/common/Command';
 
 const cmdWindowStyles: React.CSSProperties = {
   padding: '10px'
 }
 
 export type Props = {
-  onIncrement: () => any;
+  testProp: number;
+  cmdLog: LoggedCommand[];
+  onIncrement: (num: any) => any;
 }
 
-type State = {
-  log: string[];
-};
+class IHomePage extends React.Component<Props> {
 
-class IHomePage extends React.Component<Props, State> {
-  state = { log: [] }
-
-  componentDidMount() {
-    this.setState({
-      log: [
-        ...this.state.log,
-        'please type /help for list of commands'
-      ]
-    })
-  }
-
-  addToLog(cmd: string) {
-    if (cmd !== '') {
-      this.setState({
-        log: [
-          ...this.state.log,
-          cmd
-        ]
-      })
-    }
+  addNum = () => {
+    this.props.onIncrement(1);
   }
 
   render() {
-    console.log(this.props);
     return (
       <div style={cmdWindowStyles}>
         <IntroText>Nikush Dalia</IntroText>
@@ -51,9 +32,9 @@ class IHomePage extends React.Component<Props, State> {
         <IntroText>Welcome To My Portfolio Website</IntroText>
         <IntroText>Built in React, Redux, Typescript</IntroText>
         {
-          this.state.log.map((cmd, i) => {
+          this.props.cmdLog.map((cmd, i) => {
             return (
-              <LoggedCommand key={i} cmd={cmd} />
+              <Command key={i} cmd={cmd} />
             );
           })
         }
@@ -67,7 +48,8 @@ type RootAction = CMDAction;
 // type RootAction = ReactRouterAction | CountersAction;
 
 const mapStateToProps = (state: RootState) => ({
-  testProp: state.cmd.reduxCounter
+  testProp: state.cmd.reduxCounter,
+  cmdLog: state.cmd.cmdLog
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<RootAction>) => bindActionCreators({

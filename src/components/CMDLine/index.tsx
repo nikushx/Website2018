@@ -1,7 +1,11 @@
 import * as React from 'react';
 import Input from '../common/Input';
-// import { Link } from 'react-router-dom';
-// import { ROOT_PATH, TICKER_PATH } from '../../constants/paths';
+import { StateType } from 'typesafe-actions';
+import { rootReducer } from '../../store';
+import { CMDAction, cmdActions } from '../../store/cmd';
+import { Dispatch, bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { LoggedCommand } from 'src/store/cmd/reducer';
 
 const navStyles: React.CSSProperties = {
   backgroundColor: '#03DAC6',
@@ -21,15 +25,16 @@ const inputStyles: React.CSSProperties = {
   fontFamily: `'Source Code Pro', monospace`
 }
 
-const commands = [
-  'help',
-]
+type Props = {
+  commands: string[];
+  onSendCommand: (cmd: LoggedCommand) => void;
+};
 
 type State = {
   cmdInput: string
 };
 
-class CMDLine extends React.Component<object, State> {
+class ICMDLine extends React.Component<Props, State> {
   state = { cmdInput: '' }
 
   onInputChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -38,13 +43,17 @@ class CMDLine extends React.Component<object, State> {
     })
   }
 
-  sendCommand = () => {
-    const command = this.state.cmdInput.substr(1);
-    if (commands.indexOf(command) > -1) {
-      alert(command);
-    } else {
-      alert("command not found");
-    }
+  sendNewCommand = () => {
+    if (this.state.cmdInput === '') return;
+    this.props.onSendCommand(
+      {
+        type: 'regular',
+        text: this.state.cmdInput
+      }
+    );
+    this.setState({
+      cmdInput: ''
+    })
   }
 
   render() {
@@ -61,12 +70,29 @@ class CMDLine extends React.Component<object, State> {
         <Input
           styles={inputStyles}
           placeholder="> type commands here"
+          autoFocus={true}
           onChange={this.onInputChange}
-          sendCommand={this.sendCommand}
+          sendCommand={this.sendNewCommand}
+          value={this.state.cmdInput}
         />
       </div>
     );
   }
 }
 
-export default CMDLine;
+type RootState = StateType<typeof rootReducer>;
+type RootAction = CMDAction;
+
+const mapStateToProps = (state: RootState) => ({
+  // cmdLog: state.cmd.cmdLog,
+  commands: state.cmd.commands
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<RootAction>) => bindActionCreators({
+  onSendCommand: cmdActions.newCommand,
+}, dispatch);
+
+export const CMDLine = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ICMDLine);
