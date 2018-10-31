@@ -16,7 +16,7 @@ class Input extends React.Component<Props> {
       this.props.sendCommand();
     }
   }
-
+  
   render() {
     return (
       <input

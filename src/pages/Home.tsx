@@ -5,7 +5,7 @@ import { cmdActions, CMDAction } from '../store/cmd';
 import IntroText from '../components/common/IntroText';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
-import { LoggedCommand } from 'src/store/cmd/reducer';
+import { LoggedCommandResponse } from 'src/store/cmd/reducer';
 import Command from 'src/components/common/Command';
 
 const cmdWindowStyles: React.CSSProperties = {
@@ -14,7 +14,7 @@ const cmdWindowStyles: React.CSSProperties = {
 
 export type Props = {
   testProp: number;
-  cmdLog: LoggedCommand[];
+  cmdLog: LoggedCommandResponse[];
   onIncrement: (num: any) => any;
 }
 

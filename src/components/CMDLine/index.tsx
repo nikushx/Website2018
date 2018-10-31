@@ -47,7 +47,6 @@ class ICMDLine extends React.Component<Props, State> {
     if (this.state.cmdInput === '') return;
     this.props.onSendCommand(
       {
-        type: 'regular',
         text: this.state.cmdInput
       }
     );

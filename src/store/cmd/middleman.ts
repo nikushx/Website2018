@@ -1,25 +1,31 @@
-import { LoggedCommand } from './reducer';
+import { LoggedCommandResponse, Payload } from './reducer';
 
-export const determineResponse = (cmd: string) => {
-  let response: LoggedCommand;
-  switch (cmd) {
+export const determineResponse = (payload: Payload) => {
+  let response: LoggedCommandResponse;
+  switch (payload.text) {
     case 'ping':
       response = {
-        type: 'regular',
-        text: 'pong'
+        type: 'imagetext',
+        payload: {
+          text: 'pong',
+          imageUrl: 'test.png'
+        }
       }
       break;
     case 'help':
       response = {
         type: 'regular',
-        text: 'sending a chopper'
+        payload: {
+          text: 'sending a chopper'
+        }
       }
       break;
     default:
       response = {
         type: 'error',
-        text: `'${cmd}' is not a valid command.`,
-        color: 'red'
+        payload: {
+          text: `'${payload.text}' is not a valid command.`
+        }
       }
       break;
   }
