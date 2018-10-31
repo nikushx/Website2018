@@ -2,7 +2,8 @@ import { LoggedCommandResponse, Payload } from './reducer';
 
 export const determineResponse = (payload: Payload) => {
   let response: LoggedCommandResponse;
-  switch (payload.text) {
+  const text = payload.text.toLowerCase();
+  switch (text) {
     case 'ping':
       response = {
         type: 'imagetext',
