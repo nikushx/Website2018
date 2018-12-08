@@ -8,8 +8,8 @@ import { connect } from 'react-redux';
 import { LoggedCommand } from 'src/store/cmd/reducer';
 
 const navStyles: React.CSSProperties = {
+  position: 'fixed',
   backgroundColor: '#03DAC6',
-  position: 'absolute',
   width: '100%',
   bottom: 0,
   height: '40px'
@@ -17,7 +17,6 @@ const navStyles: React.CSSProperties = {
 
 const inputStyles: React.CSSProperties = {
   backgroundColor: '#3700B3',
-  position: 'absolute',
   width: '100%',
   height: '100%',
   padding: '0 10px',
@@ -43,6 +42,13 @@ class ICMDLine extends React.Component<Props, State> {
     })
   }
 
+  updateScroll = () => {
+    const element = document.getElementById('CMDWrapper') as HTMLElement;
+    setTimeout(() => {
+      element.scrollTop = element.scrollHeight
+    }, 0);
+  }
+
   sendNewCommand = () => {
     if (this.state.cmdInput === '') return;
     this.props.onSendCommand(
@@ -52,7 +58,8 @@ class ICMDLine extends React.Component<Props, State> {
     );
     this.setState({
       cmdInput: ''
-    })
+    });
+    this.updateScroll();
   }
 
   render() {

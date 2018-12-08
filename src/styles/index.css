@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
 
+html { 
+
+}
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -15,17 +23,51 @@ input {
   padding: 0;
 }
 
+p {
+  margin: 10px 0;
+}
+
+.generic--response {
+  width: 600px;
+}
+
 .App {
   overflow: hidden;
   width: 100%;
   position: absolute;
   bottom: 0;
-  padding-bottom: 30px;
+}
+
+#CornerRibbon {
+  width: 200px;
+  background: #39d;
+  position: fixed;
+  text-align: center;
+  line-height: 50px;
+  letter-spacing: 1px;
+  color: #f0f0f0;
+  top: 25px;
+  right: -50px;
+  left: auto;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  /* Enable the ribbon. */
+  display: none;
+}
+
+#CMDWrapper {
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+#CMDContainer {
+  padding: 0 10px;
+  padding-bottom: 40px;
 }
 
 .imagetext--wrapper {
   display: block;
-  margin: 10px 0;
+  margin: 30px 0;
 }
 
 .imagetext--container {
@@ -34,13 +76,88 @@ input {
 }
 
 .imagetext--image {
-  width: 100px;
+  width: 200px;
   display: inline-block;
-  padding-right: 20px;
+  padding-right: 30px;
+}
+
+.imagetext--header {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .imagetext--text {
-  width: 100px;
-  display: inline-block;
-  margin: 0;
+  display: block;
+}
+
+.project--container {
+  margin:  30px 0 40px 0;
+  display: flex;
+}
+
+.project--collapseToggle {
+  display: flex;
+  align-items: center;
+  width: 20px;
+}
+
+.caretToggle {
+  transition: all .4s;
+}
+
+.project--image {
+  width: 200px;
+  margin-right: 20px;
+  transition: all .4s;
+}
+
+.project--title {
+  font-size: 3em;
+  display: block;
+  color: #03DAC6;
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+
+.project--subtitle {
+  font-size: 1.5em;
+  display: block;
+  color: #018786;
+  margin-bottom: 10px;
+}
+
+.project--text__wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.project--text {
+  display: block;
+  width: 600px;
+  transition: all .4s;
+  line-height: 2em;
+}
+
+@media only screen and (max-width: 768px) {
+
+  .generic--response {
+    width: auto;
+  }
+
+  .project--container {
+    display: block;
+    text-align: center;
+  }
+
+  .project--image {
+    margin-right: 0px;
+  }
+
+  .project--text {
+    width: auto;
+  }
+
 }

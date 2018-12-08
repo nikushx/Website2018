@@ -13,22 +13,26 @@ export type LoggedCommand = {
 }
 
 interface BaseResponse {
-  text: string;
+  text: string; // TODO: make this an array and then display a span for each
   color?: string;
 }
 
-// interface RegularResponse extends BaseResponse {}
-
-// interface ErrorResponse extends BaseResponse {}
+export interface ProjectResponse extends BaseResponse {
+  title: string;
+  subtitle: string;
+  image?: string;
+  link?: string;
+}
 
 export interface ImageTextResponse extends BaseResponse {
+  header: string;
   imageUrl: string;
 }
 
-export type Payload = BaseResponse | ImageTextResponse; /* | RegularResponse | ErrorResponse */
+export type Payload = BaseResponse | ImageTextResponse | ProjectResponse; /* | RegularResponse | ErrorResponse */
 
 export type LoggedCommandResponse = {
-  type: 'error' | 'regular' | 'imagetext';
+  type: 'error' | 'regular' | 'imagetext' | 'project';
   payload: Payload;
 }
 
@@ -43,7 +47,6 @@ const cmdLogInit: LoggedCommandResponse[] = [
     type: 'regular',
     payload: {
       text: 'please type \'help\' for list of commands',
-      color: 'white'
     }
   }
 ];
@@ -70,7 +73,7 @@ export default combineReducers<CMDState, CMDAction>({
         const response = determineResponse(action.payload);
         return [
           ...state,
-          response
+          ...response
         ]
       default:
         return state;

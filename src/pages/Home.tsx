@@ -8,10 +8,6 @@ import { Dispatch, bindActionCreators } from 'redux';
 import { LoggedCommandResponse } from 'src/store/cmd/reducer';
 import Command from 'src/components/common/Command';
 
-const cmdWindowStyles: React.CSSProperties = {
-  padding: '10px'
-}
-
 export type Props = {
   testProp: number;
   cmdLog: LoggedCommandResponse[];
@@ -26,18 +22,20 @@ class IHomePage extends React.Component<Props> {
 
   render() {
     return (
-      <div style={cmdWindowStyles}>
-        <IntroText>Nikush Dalia</IntroText>
-        <IntroText>Web Developer, Entrepreneur, Creative</IntroText>
-        <IntroText>Welcome To My Portfolio Website</IntroText>
-        <IntroText>Built in React, Redux, Typescript</IntroText>
-        {
-          this.props.cmdLog.map((cmd, i) => {
-            return (
-              <Command key={i} cmd={cmd} />
-            );
-          })
-        }
+      <div id='CMDWrapper'>
+        <div id="CMDContainer">
+          <IntroText>Nikush Dalia</IntroText>
+          <IntroText>Web Developer, Entrepreneur, Creative</IntroText>
+          <IntroText>Welcome To My Portfolio Website</IntroText>
+          <IntroText>Built in React, Redux, Typescript</IntroText>
+          {
+            this.props.cmdLog.map((cmd, i) => {
+              return (
+                <Command key={i} cmd={cmd} />
+              );
+            })
+          }
+        </div>
       </div>
     );
   }

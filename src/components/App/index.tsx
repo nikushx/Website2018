@@ -6,9 +6,10 @@ import { CMDLine } from '../CMDLine';
 class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        <CMDLine />
+      <div className='App'>
+        <div id='CornerRibbon'>Click around!</div>
         <HomePage />
+        <CMDLine />
       </div>
     );
   }
