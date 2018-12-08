@@ -93,18 +93,27 @@ p {
 }
 
 .project--container {
-  margin:  30px 0 40px 0;
+  margin:  20px 0;
   display: flex;
 }
 
 .project--collapseToggle {
   display: flex;
   align-items: center;
-  width: 20px;
+  width: 30px;
+}
+
+.project--collapseToggle.desktop {
+  display: flex;
+}
+
+.project--collapseToggle.mobile {
+  display: none;
 }
 
 .caretToggle {
   transition: all .4s;
+  font-size: 36px;
 }
 
 .project--image {
@@ -156,8 +165,30 @@ p {
     margin-right: 0px;
   }
 
+  .project--title {
+    font-size: 2em;
+    margin-bottom: 5px;
+  }
+
+  .project--subtitle {
+    font-size: 1.2em;
+  }
+
   .project--text {
     width: auto;
+  }
+
+  .project--collapseToggle {
+    text-align: center;
+    width: 100%;
+  }
+
+  .project--collapseToggle.desktop {
+    display: none;
+  }
+
+  .project--collapseToggle.mobile {
+    display: inline-block;
   }
 
 }

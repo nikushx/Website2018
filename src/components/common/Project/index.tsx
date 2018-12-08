@@ -36,10 +36,10 @@ class Project extends React.Component<Props, State> {
 
     return (
       <div className='project--wrapper'>
-        <ReactTooltip type='light' />
+        <ReactTooltip type='info' />
         <div className='project--container'>
-          <div className='project--collapseToggle' onClick={this.toggleProject}>
-            <FontAwesomeIcon className='caretToggle' style={caretStyles} icon={faCaretRight} >close</FontAwesomeIcon>
+          <div className='project--collapseToggle desktop' onClick={this.toggleProject} data-tip='Open Description'>
+            <FontAwesomeIcon className='caretToggle' style={caretStyles} icon={faCaretRight} />
           </div>
           {
             (this.props.image)
@@ -58,6 +58,9 @@ class Project extends React.Component<Props, State> {
 
               <a target='_blank' href={this.props.link} className='project--title' data-tip='Open Project Link'>{this.props.title}</a>
               <span className='project--subtitle'>{this.props.subtitle}</span>
+            </div>
+            <div className='project--collapseToggle mobile' onClick={this.toggleProject} data-tip='Open Description'>
+              <FontAwesomeIcon className='caretToggle' style={caretStyles} icon={faCaretRight} >close</FontAwesomeIcon>
             </div>
             {
               (this.state.open)
