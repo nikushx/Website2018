@@ -25,8 +25,8 @@ const inputStyles: React.CSSProperties = {
 }
 
 type Props = {
-  commands: string[];
   onSendCommand: (cmd: LoggedCommand) => void;
+  onClearCommands: () => void;
 };
 
 type State = {
@@ -51,14 +51,26 @@ class ICMDLine extends React.Component<Props, State> {
 
   sendNewCommand = () => {
     if (this.state.cmdInput === '') return;
-    this.props.onSendCommand(
-      {
-        text: this.state.cmdInput
-      }
-    );
+
+    switch (this.state.cmdInput) {
+      case 'clear':
+      case 'cls':
+      case 'clean':
+        this.props.onClearCommands();
+        break;
+      default:
+        this.props.onSendCommand(
+          {
+            text: this.state.cmdInput
+          }
+        );
+        break;
+    }
+
     this.setState({
       cmdInput: ''
     });
+
     this.updateScroll();
   }
 
@@ -91,11 +103,11 @@ type RootAction = CMDAction;
 
 const mapStateToProps = (state: RootState) => ({
   // cmdLog: state.cmd.cmdLog,
-  commands: state.cmd.commands
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<RootAction>) => bindActionCreators({
   onSendCommand: cmdActions.newCommand,
+  onClearCommands: cmdActions.clearCommands
 }, dispatch);
 
 export const CMDLine = connect(

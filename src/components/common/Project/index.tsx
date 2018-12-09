@@ -34,9 +34,11 @@ class Project extends React.Component<Props, State> {
       width: (this.state.open) ? '200px' : '100px'
     };
 
+    const enabledTooltips = (window.matchMedia("(max-width: 768px)").matches) ? true : false;
+
     return (
       <div className='project--wrapper'>
-        <ReactTooltip type='info' />
+        <ReactTooltip type='info' disable={enabledTooltips} />
         <div className='project--container'>
           <div className='project--collapseToggle desktop' onClick={this.toggleProject} data-tip='Open Description'>
             <FontAwesomeIcon className='caretToggle' style={caretStyles} icon={faCaretRight} />
@@ -54,13 +56,8 @@ class Project extends React.Component<Props, State> {
           }
           <div className='project--text__wrapper'>
             <div className='project--title__wrapper'>
-            <span>{this.state.open}</span>
-
               <a target='_blank' href={this.props.link} className='project--title' data-tip='Open Project Link'>{this.props.title}</a>
               <span className='project--subtitle'>{this.props.subtitle}</span>
-            </div>
-            <div className='project--collapseToggle mobile' onClick={this.toggleProject} data-tip='Open Description'>
-              <FontAwesomeIcon className='caretToggle' style={caretStyles} icon={faCaretRight} >close</FontAwesomeIcon>
             </div>
             {
               (this.state.open)

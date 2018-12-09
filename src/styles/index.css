@@ -90,6 +90,30 @@ p {
 
 .imagetext--text {
   display: block;
+  width: 600px;
+  color: #dcdcdc;
+  line-height: 1.5em;
+  margin-bottom: 10px;
+}
+
+.imagetext--text:last-child {
+  margin-bottom: 0;
+}
+
+.link--container {
+  margin-bottom: 10px;
+}
+
+.link--icon {
+  font-size: 3em;
+  color: #FF0266;
+  margin-right: 10px;
+}
+
+.link--hyperlink {
+  font-size: 1.5em;
+  color: #FFDE03;
+  text-decoration: none;
 }
 
 .project--container {
@@ -101,14 +125,6 @@ p {
   display: flex;
   align-items: center;
   width: 30px;
-}
-
-.project--collapseToggle.desktop {
-  display: flex;
-}
-
-.project--collapseToggle.mobile {
-  display: none;
 }
 
 .caretToggle {
@@ -123,7 +139,7 @@ p {
 }
 
 .project--title {
-  font-size: 3em;
+  font-size: 2em;
   display: block;
   color: #03DAC6;
   margin-bottom: 10px;
@@ -141,6 +157,7 @@ p {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  padding-left: 20px;
 }
 
 .project--text {
@@ -150,15 +167,34 @@ p {
   line-height: 2em;
 }
 
+.helpcommand--wrapper {
+  margin-bottom: 10px;
+}
+
+.helpcommand--container {
+  display: inline-flex;
+  color: rgb(255, 2, 102);
+  border: 1px solid;
+  padding: 10px;
+}
+
+.helpcommand--command {
+  min-width: 75px;
+  max-width: 75px;
+}
+
+.helpcommand--description {
+  padding-left: 20px;
+}
+
 @media only screen and (max-width: 768px) {
+
+  #CMDContainer {
+    padding-top: 50px;
+  }
 
   .generic--response {
     width: auto;
-  }
-
-  .project--container {
-    display: block;
-    text-align: center;
   }
 
   .project--image {
@@ -166,12 +202,12 @@ p {
   }
 
   .project--title {
-    font-size: 2em;
+    font-size: 1.5em;
     margin-bottom: 5px;
   }
 
   .project--subtitle {
-    font-size: 1.2em;
+    font-size: 1em;
   }
 
   .project--text {
@@ -187,8 +223,22 @@ p {
     display: none;
   }
 
-  .project--collapseToggle.mobile {
-    display: inline-block;
+  .imagetext--header {
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .imagetext--container {
+    flex-direction: column;
+  }
+
+  .imagetext--image {
+    padding-right: 0px;
+  }
+
+  .imagetext--text {
+    text-align: center;
+    width: auto;
   }
 
 }

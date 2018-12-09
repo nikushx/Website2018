@@ -3,7 +3,7 @@ import * as React from 'react';
 type Props = {
   source: string;
   header: string;
-  text: string;
+  body: string[];
 }
 
 class ImageText extends React.Component<Props> {
@@ -14,7 +14,13 @@ class ImageText extends React.Component<Props> {
           <img className='imagetext--image' src={this.props.source} />
           <div className='imagetext--text__wrapper'>
             <span className='imagetext--header'>{this.props.header}</span>
-            <span className='imagetext--text'>{this.props.text}</span>
+            {
+              this.props.body.map((text, i) => {
+                return (
+                  <span key={i} className='imagetext--text'>{text}</span>
+                );
+              })
+            }
           </div>
         </div>
       </div>

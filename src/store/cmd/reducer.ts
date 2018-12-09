@@ -2,9 +2,10 @@ import { combineReducers } from 'redux';
 import { ActionType } from 'typesafe-actions';
 
 import * as cmd from './actions';
-import { ADD, NEW_COMMAND } from './constants';
+import { ADD, NEW_COMMAND, CLEAR_COMMANDS } from './constants';
 
 import { determineResponse } from './middleman';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 export type CMDAction = ActionType<typeof cmd>;
 
@@ -17,6 +18,15 @@ interface BaseResponse {
   color?: string;
 }
 
+export interface LinkResponse extends BaseResponse {
+  link: string;
+  icon: IconDefinition;
+}
+
+export interface HelpCommandResponse extends BaseResponse {
+  command: string;
+}
+
 export interface ProjectResponse extends BaseResponse {
   title: string;
   subtitle: string;
@@ -27,19 +37,19 @@ export interface ProjectResponse extends BaseResponse {
 export interface ImageTextResponse extends BaseResponse {
   header: string;
   imageUrl: string;
+  body: string[];
 }
 
-export type Payload = BaseResponse | ImageTextResponse | ProjectResponse; /* | RegularResponse | ErrorResponse */
+export type Payload = BaseResponse | ImageTextResponse | ProjectResponse | HelpCommandResponse | LinkResponse; /* | RegularResponse | ErrorResponse */
 
 export type LoggedCommandResponse = {
-  type: 'error' | 'regular' | 'imagetext' | 'project';
+  type: 'error' | 'regular' | 'imagetext' | 'project' | 'helpcommand' | 'link';
   payload: Payload;
 }
 
 export type CMDState = {
   readonly reduxCounter: number;
   readonly cmdLog: LoggedCommandResponse[];
-  readonly commands: string[];
 };
 
 const cmdLogInit: LoggedCommandResponse[] = [
@@ -49,11 +59,6 @@ const cmdLogInit: LoggedCommandResponse[] = [
       text: 'please type \'help\' for list of commands',
     }
   }
-];
-
-const commandList = [
-  'help',
-  'ping'
 ];
 
 export default combineReducers<CMDState, CMDAction>({
@@ -74,13 +79,9 @@ export default combineReducers<CMDState, CMDAction>({
         return [
           ...state,
           ...response
-        ]
-      default:
-        return state;
-    }
-  },
-  commands: (state = commandList, action) => {
-    switch (action.type) {
+        ];
+      case CLEAR_COMMANDS:
+        return cmdLogInit;
       default:
         return state;
     }
