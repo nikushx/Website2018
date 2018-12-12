@@ -31,6 +31,20 @@ p {
   width: 600px;
 }
 
+#helperCMD {
+  position: absolute;
+  display: inline-block;
+  bottom: 50px;
+  width: 270px;
+  padding: 10px;
+  background: yellow;
+  color: black;
+  left: 5px;
+  font-family: sans-serif;
+  opacity: 0;
+  transition: all 2s;
+}
+
 .App {
   overflow: hidden;
   width: 100%;
@@ -106,13 +120,14 @@ p {
 
 .link--icon {
   font-size: 3em;
-  color: #FF0266;
+  color: darkorange;
   margin-right: 10px;
+  width: 50px !important;
 }
 
 .link--hyperlink {
   font-size: 1.5em;
-  color: #FFDE03;
+  color: rgb(255, 222, 3);
   text-decoration: none;
 }
 
@@ -167,20 +182,75 @@ p {
   line-height: 2em;
 }
 
+.employment--container {
+  margin:  20px 0;
+  display: flex;
+}
+
+.employment--collapseToggle {
+  display: flex;
+  align-items: center;
+  width: 30px;
+}
+
+.employment--image {
+  width: 200px;
+  margin-right: 20px;
+  transition: all .4s;
+}
+
+.employment--title {
+  font-size: 2em;
+  display: block;
+  color: #efe5fd;
+  margin-bottom: 5px;
+  text-decoration: none;
+}
+
+.employment--position {
+  display: block;
+  color: #D4BFF9;
+}
+
+.employment--location {
+  color: #B794F6;
+  display: block;
+}
+
+.employment--dates {
+  color: #9965f4;
+  display: block;
+}
+
+.employment--text__wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 20px;
+}
+
+.employment--text {
+  display: block;
+  width: 600px;
+  transition: all .4s;
+  line-height: 2em;
+  margin-top: 5px;
+}
+
 .helpcommand--wrapper {
   margin-bottom: 10px;
 }
 
 .helpcommand--container {
   display: inline-flex;
-  color: rgb(255, 2, 102);
+  color: darkorange;
   border: 1px solid;
   padding: 10px;
 }
 
 .helpcommand--command {
-  min-width: 75px;
-  max-width: 75px;
+  min-width: 85px;
+  max-width: 85px;
 }
 
 .helpcommand--description {
@@ -188,6 +258,12 @@ p {
 }
 
 @media only screen and (max-width: 768px) {
+
+  #helperCMD {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
 
   #CMDContainer {
     padding-top: 50px;
@@ -220,6 +296,28 @@ p {
   }
 
   .project--collapseToggle.desktop {
+    display: none;
+  }
+
+  .employment--image {
+    margin-right: 0px;
+  }
+
+  .employment--title {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+  }
+
+  .employment--text {
+    width: auto;
+  }
+
+  .employment--collapseToggle {
+    text-align: center;
+    width: 100%;
+  }
+
+  .employment--collapseToggle.desktop {
     display: none;
   }
 

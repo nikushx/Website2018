@@ -1,11 +1,15 @@
 import * as React from 'react';
 
-const introTextStyles: React.CSSProperties = {
-  color: '#777'
+type Props = {
+  color: string;
 }
 
-class IntroText extends React.Component {
+class IntroText extends React.Component<Props> {
   render() {
+    const introTextStyles: React.CSSProperties = {
+      color: this.props.color
+    }
+
     return (
       <p style={introTextStyles}>{this.props.children}</p>
     );

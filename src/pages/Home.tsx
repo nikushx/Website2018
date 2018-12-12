@@ -20,14 +20,21 @@ class IHomePage extends React.Component<Props> {
     this.props.onIncrement(1);
   }
 
+  onWrapperClick = () => {
+    const input = document.getElementById('CMDInput');
+    if (input) {
+      input.focus();
+    };
+  }
+
   render() {
     return (
-      <div id='CMDWrapper'>
+      <div id='CMDWrapper' onClick={this.onWrapperClick}>
         <div id="CMDContainer">
-          <IntroText>Nikush Dalia</IntroText>
-          <IntroText>Web Developer, Entrepreneur, Creative</IntroText>
-          <IntroText>Welcome To My Portfolio Website</IntroText>
-          <IntroText>Built in React, Redux, Typescript</IntroText>
+          <IntroText color='#90ee02'>Nikush Dalia</IntroText>
+          <IntroText color='#aaf255'>Web Developer, Entrepreneur, Creative</IntroText>
+          <IntroText color='#c6f68d'>Welcome To My Portfolio Website</IntroText>
+          <IntroText color='#defabb'>Built in React, Redux, Typescript</IntroText>
           {
             this.props.cmdLog.map((cmd, i) => {
               return (

@@ -33,20 +33,29 @@ type State = {
   cmdInput: string
 };
 
+export const updateScroll = () => {
+  const element = document.getElementById('CMDWrapper') as HTMLElement;
+  setTimeout(() => {
+    element.scrollTop = element.scrollHeight
+  }, 400);
+}
+
 class ICMDLine extends React.Component<Props, State> {
   state = { cmdInput: '' }
+
+  componentDidMount() {
+    const helperCMD = document.getElementById('helperCMD');
+    if (helperCMD) {
+      setTimeout(() => {
+        helperCMD.style.opacity = '1';
+      }, 1000);
+    }
+  }
 
   onInputChange = (e: React.FormEvent<HTMLInputElement>) => {
     this.setState({
       cmdInput: e.currentTarget.value
     })
-  }
-
-  updateScroll = () => {
-    const element = document.getElementById('CMDWrapper') as HTMLElement;
-    setTimeout(() => {
-      element.scrollTop = element.scrollHeight
-    }, 0);
   }
 
   sendNewCommand = () => {
@@ -71,10 +80,11 @@ class ICMDLine extends React.Component<Props, State> {
       cmdInput: ''
     });
 
-    this.updateScroll();
+    updateScroll();
   }
 
   render() {
+
     return (
       <div style={navStyles}>
         {
@@ -85,9 +95,11 @@ class ICMDLine extends React.Component<Props, State> {
           </Link>
           */
         }
+        <div id='helperCMD'><b>Confused?</b> This website is meant to look like a developer console.<br /><br />Type <b>help</b> below and press enter to start interacting with the website.</div>
         <Input
+          uniqueId='CMDInput'
           styles={inputStyles}
-          placeholder="> type commands here"
+          placeholder="$ type commands here"
           autoFocus={true}
           onChange={this.onInputChange}
           sendCommand={this.sendNewCommand}

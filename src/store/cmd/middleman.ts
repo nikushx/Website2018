@@ -6,6 +6,164 @@ export const determineResponse = (payload: Payload) => {
   let response: LoggedCommandResponse[];
   const text = payload.text.toLowerCase();
   switch (text) {
+    case `'help'`:
+      response = [
+        {
+          type: 'regular',
+          payload: {
+            text: `'help'`,
+            color: 'grey'
+          }
+        },
+        {
+          type: 'regular',
+          payload: {
+            text: 
+              `Woops! You do not need to actually type the quotation marks when \
+              writing a command! Just literally type this --> help`,
+            color: 'darkorange'
+          }
+        }
+      ];
+      break;
+    case 'job':
+    case 'jobs':
+    case 'work':
+    case 'employment':
+    case 'proofpoint':
+    case 'responsival':
+    case 'semio':
+    case 'semio.ai':
+    case 'calypso':
+    case 'experience':
+      response = [
+        {
+          type: 'regular',
+          payload: {
+            text: 'employment',
+            color: 'grey'
+          }
+        },
+        {
+          type: 'regular',
+          payload: {
+            text: 'To view the job responsibilities, please view on desktop.',
+            color: 'lime'
+          }
+        },
+        {
+          type: 'employment',
+          payload: {
+            title: `Proofpoint`,
+            position: `Front End Developer`,
+            image: 'assets/proofpoint.png',
+            dates: '2018 (Current)',
+            location: 'Pittsburgh, PA',
+            text:
+              `Developed extensive training framework for learning cybersecurity essentials.\
+              Worked with modern Javascript libraries to create a responsive, accessible platform\
+              with customizable modules and a suite of module customization tools for hiring managers\
+              to personalize modules for their employees. Worked with state-of-the-art systems such as \
+              Docker, MongoDB, RabbitMQ to create and deploy production training modules and customization frameworks.`
+          }
+        },
+        {
+          type: 'employment',
+          payload: {
+            title: `Frázïer Garments`,
+            position: `CEO, Owner, Sole Developer`,
+            image: 'assets/fg.png',
+            dates: '2016-2018 (Current)',
+            location: 'Pittsburgh, PA',
+            text:
+              `Developed extensive training framework for learning cybersecurity essentials.\
+              Worked with modern Javascript libraries to create a responsive, accessible platform\
+              with customizable modules and a suite of module customization tools for hiring managers\
+              to personalize modules for their employees. Worked with state-of-the-art systems such as \
+              Docker, MongoDB, RabbitMQ to create and deploy production training modules and customization frameworks.`
+          }
+        },
+        {
+          type: 'employment',
+          payload: {
+            title: `Semio.AI`,
+            position: `Software Engineering Contractor`,
+            image: 'assets/semio.png',
+            dates: 'Summer 2018',
+            location: 'Remote',
+            text:
+              `Designed and developed React/Redux scalable web applications \
+              in conjunction with Typescript for robotics development. \
+              Worked closely with CTO remotely to create full-stack applications \
+              to add to a software suite used to create functions and applications \
+              for robots and IoT devices. Created WebSocket servers and 3D robot configuration \
+              tools to integrate into the software suite.`
+          }
+        },
+        {
+          type: 'employment',
+          payload: {
+            title: `Visionary Machines Inc.`,
+            position: `Software Engineer`,
+            image: 'assets/calypso.png',
+            dates: '2017-2018',
+            location: 'Remote',
+            text:
+              `Contracted to develop features for a robotics automation \
+              software built in Javascript for children to learn robotics concepts \
+              while creating programs for the Cozmo social robot. Rewrote poorly written \
+              software to match Google Javascript Code Standards. Worked with a Pixi.js graphical \
+              interface to simulate robot behavior.`
+          }
+        },
+        {
+          type: 'employment',
+          payload: {
+            title: `Responsival`,
+            position: `CTO & Lead Developer`,
+            image: 'assets/responsival.png',
+            dates: '2017-2018',
+            location: 'Pittsburgh, PA',
+            text:
+              `Designed and developed hundreds of e-commerce websites \
+              for both enterprise and local clients (i.e. ION360.com, GardenTowerProject.com, many more). \
+              Developed Shopify themes and worked heavily with jQuery, other JavaScript libraries/plug-ins \
+              to turn mockups into fully responsive e-commerce websites to meet and exceed client needs.`
+          }
+        },
+        {
+          type: 'employment',
+          payload: {
+            title: `Honeywell - Vocollect Division`,
+            position: `Voice Recognition ML Intern`,
+            image: 'assets/honeywell.png',
+            dates: '2016-2017',
+            location: 'Pittsburgh, PA',
+            text:
+              `Developed speech recognition processes based on machine learning concepts at Vocollect, a recently \
+              acquired Honeywell subsidiary, in Perl & C++. Designed software to optimize speech recognition \
+              detection and develop robust neural networks through running experiments on the trained neural \
+              networks. Tested high-performance GPU’s for neural network training.`
+          }
+        },
+        {
+          type: 'employment',
+          payload: {
+            title: `Codecademy`,
+            position: `Pro Advisor`,
+            image: 'assets/codecademy.png',
+            dates: '2016-2017',
+            location: 'Remote',
+            text:
+              `Advised and tutored aspiring developers on the Codecademy Pro program as an on-demand adviser. \
+              Aided students along their path to completing Codecademy’s extensive coding boot camp in a multitude \
+              of languages including AngularJS, Java, Python, Javascript, HTML/CSS, PHP, etc.`
+          }
+        }
+      ];
+      break;
+    case 'proj':
+    case 'projs':
     case 'projects':
       response = [
         {
@@ -18,7 +176,7 @@ export const determineResponse = (payload: Payload) => {
         {
           type: 'regular',
           payload: {
-            text: 'NOTE: Projects listed below can be completed, a work in progress, or abandoned. While not all of my projects are listed, these are the ones I consider to be my biggest efforts.',
+            text: 'NOTE: The projects listed below are either completed, works in progress, or abandoned. While not all of my projects are listed, the ones listed are those I consider to be my best efforts over the years.',
             color: 'darkorange'
           }
         },
@@ -26,13 +184,6 @@ export const determineResponse = (payload: Payload) => {
           type: 'regular',
           payload: {
             text: 'To view the project, click the image.',
-            color: 'lime'
-          }
-        },
-        {
-          type: 'regular',
-          payload: {
-            text: 'To expand the project, click the caret.',
             color: 'lime'
           }
         },
@@ -123,7 +274,7 @@ export const determineResponse = (payload: Payload) => {
         {
           type: 'regular',
           payload: {
-            text: 'NOTE: I think awards are kinda silly. Very subjective to the scenario, not a true display of talent or competence. However, I am still proud of the things I created for them.',
+            text: `NOTE: I think awards in general are subjective to the specific context and are not representative to a person's talent or merit. However, I am still proud of the projects I have created and the awards I have received for them.`,
             color: '#B00020'
           }
         },
@@ -165,10 +316,10 @@ export const determineResponse = (payload: Payload) => {
               `It's hard to classify myself. I'm a technology enthusiast, which is what \
               led me to become a programmer.\
               I attended the University of Pittsburgh but am completely self-taught when it comes to \
-              my career. I am above all, a learner. Learning new things is what keeps me going in life, I think.\
+              my career. I am above all, a learner. Learning new things is what keeps me going in life.\
               I've always held an entrepreneurial spirit, and am always looking for new ventures to \
               invest my time into.`,
-              `I love music, of any kind as long as my ears like it. I love the outdoors \
+              `I love music. I love the outdoors \
               which is kind of ironic because I spend most of my time on the computer. I have a strong appreciation \
               for life and all the potential it holds. I try to create, develop, and do everything with \
               complete independance from common beliefs and traditional thought processes. Anyone who knows me \
@@ -224,7 +375,7 @@ export const determineResponse = (payload: Payload) => {
         {
           type: 'link',
           payload: {
-            text: 'Email',
+            text: 'nikushdalia@gmail.com',
             link: 'mailto:nikushdalia@gmail.com',
             icon: faMailBulk
           }
@@ -269,22 +420,15 @@ export const determineResponse = (payload: Payload) => {
         {
           type: 'helpcommand',
           payload: {
-            command: 'clear',
-            text: 'clear screen and start fresh'
+            command: 'employment',
+            text: 'places I have worked'
           }
         },
         {
           type: 'helpcommand',
           payload: {
-            command: 'ping',
-            text: 'pong'
-          }
-        },
-        {
-          type: 'helpcommand',
-          payload: {
-            command: 'contact',
-            text: 'github, social media, email'
+            command: 'projects',
+            text: 'projects I have developed for'
           }
         },
         {
@@ -297,8 +441,8 @@ export const determineResponse = (payload: Payload) => {
         {
           type: 'helpcommand',
           payload: {
-            command: 'projects',
-            text: 'list of projects I have developed for'
+            command: 'contact',
+            text: 'github, social media, email'
           }
         },
         {
@@ -306,6 +450,20 @@ export const determineResponse = (payload: Payload) => {
           payload: {
             command: 'awards',
             text: 'list of awards I have received'
+          }
+        },
+        {
+          type: 'helpcommand',
+          payload: {
+            command: 'clear',
+            text: 'clear screen and start fresh'
+          }
+        },
+        {
+          type: 'helpcommand',
+          payload: {
+            command: 'ping',
+            text: 'pong'
           }
         }
       ]

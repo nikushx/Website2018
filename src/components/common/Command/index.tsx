@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { LoggedCommandResponse, ImageTextResponse, ProjectResponse, HelpCommandResponse, LinkResponse } from 'src/store/cmd/reducer';
+import { LoggedCommandResponse, ImageTextResponse, ProjectResponse, HelpCommandResponse, LinkResponse, EmploymentResponse } from 'src/store/cmd/reducer';
 import ImageText from '../ImageText';
 import Project from '../Project';
-import HelpCommand from '../HelpCommand';
+import { HelpCommand } from '../HelpCommand';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Employment from '../Employment';
 
 type Props = {
   cmd: LoggedCommandResponse;
@@ -25,6 +26,20 @@ class Command extends React.Component<Props> {
       <HelpCommand
         command={response.command}
         description={response.text}
+      />
+    );
+  }
+
+  getEmploymentResponse = (): JSX.Element => {
+    const response = this.props.cmd.payload as EmploymentResponse;
+    return (
+      <Employment
+        title={response.title}
+        position={response.position}
+        image={response.image}
+        dates={response.dates}
+        location={response.location}
+        text={response.text}
       />
     );
   }
@@ -74,6 +89,9 @@ class Command extends React.Component<Props> {
       case 'imagetext':
         response = this.getImageTextResponse()
         break;
+      case 'employment':
+        response = this.getEmploymentResponse()
+        break;
       case 'project':
         response = this.getProjectResponse()
         break;
@@ -81,7 +99,7 @@ class Command extends React.Component<Props> {
         response = this.getHelpCommandResponse()
         break;
       default:
-        response = <p className='generic--response' style={{ color: commandColor }}>> {this.props.cmd.payload.text}</p>
+        response = <p className='generic--response' style={{ color: commandColor }}>$ {this.props.cmd.payload.text}</p>
     }
 
     return response;

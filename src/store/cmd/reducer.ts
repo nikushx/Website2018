@@ -34,16 +34,29 @@ export interface ProjectResponse extends BaseResponse {
   link?: string;
 }
 
+export interface EmploymentResponse extends BaseResponse {
+  title: string;
+  position: string;
+  image: string;
+  dates: string;
+  location: string;
+}
+
 export interface ImageTextResponse extends BaseResponse {
   header: string;
   imageUrl: string;
   body: string[];
 }
 
-export type Payload = BaseResponse | ImageTextResponse | ProjectResponse | HelpCommandResponse | LinkResponse; /* | RegularResponse | ErrorResponse */
+export type Payload = BaseResponse
+                      | ImageTextResponse
+                      | ProjectResponse
+                      | HelpCommandResponse
+                      | LinkResponse
+                      | EmploymentResponse;
 
 export type LoggedCommandResponse = {
-  type: 'error' | 'regular' | 'imagetext' | 'project' | 'helpcommand' | 'link';
+  type: 'error' | 'regular' | 'imagetext' | 'project' | 'helpcommand' | 'link' | 'employment';
   payload: Payload;
 }
 
