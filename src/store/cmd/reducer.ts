@@ -56,7 +56,7 @@ export type Payload = BaseResponse
                       | EmploymentResponse;
 
 export type LoggedCommandResponse = {
-  type: 'error' | 'regular' | 'imagetext' | 'project' | 'helpcommand' | 'link' | 'employment';
+  type: 'error' | 'enteredcommand' | 'plain' | 'imagetext' | 'project' | 'helpcommand' | 'link' | 'employment';
   payload: Payload;
 }
 
@@ -67,7 +67,7 @@ export type CMDState = {
 
 const cmdLogInit: LoggedCommandResponse[] = [
   {
-    type: 'regular',
+    type: 'plain',
     payload: {
       text: 'please type \'help\' for list of commands',
     }

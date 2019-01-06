@@ -81,6 +81,7 @@ class Command extends React.Component<Props> {
       ;
     
     const type = this.props.cmd.type;
+
     let response: JSX.Element;
     switch (type) {
       case 'link':
@@ -98,8 +99,11 @@ class Command extends React.Component<Props> {
       case 'helpcommand':
         response = this.getHelpCommandResponse()
         break;
+      case 'enteredcommand':
+        response = <p className='generic--response' style={{ color: commandColor }}>nikushx$ {this.props.cmd.payload.text}</p>
+        break;
       default:
-        response = <p className='generic--response' style={{ color: commandColor }}>$ {this.props.cmd.payload.text}</p>
+        response = <p className='generic--response' style={{ color: commandColor }}>{this.props.cmd.payload.text}</p>
     }
 
     return response;

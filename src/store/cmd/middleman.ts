@@ -2,21 +2,105 @@ import { LoggedCommandResponse, Payload } from './reducer';
 import { faLinkedin, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faMailBulk } from '@fortawesome/free-solid-svg-icons';
 
+const determineDynamicResponse = (text: string): string => {
+  if (text.startsWith('cd ')) {
+    if (text.includes('secret_folder')) {
+      text = 'secret_folder';
+    } else {
+      text = 'cd';
+    }
+  }
+
+  if (text.includes('chmod')) {
+    if (text.includes('secret_folder')) {
+      text = 'chmod secret_folder';
+    } else {
+      text = 'chmod';
+    }
+  }
+  
+  return text;
+}
+
 export const determineResponse = (payload: Payload) => {
   let response: LoggedCommandResponse[];
-  const text = payload.text.toLowerCase();
+  let text = payload.text.toLowerCase();
+
+  // modifier for cd 
+  const originalText = text;
+  text = determineDynamicResponse( text );
+
   switch (text) {
-    case `'help'`:
+    case 'chmod secret_folder':
       response = [
         {
-          type: 'regular',
+          type: 'enteredcommand',
           payload: {
-            text: `'help'`,
-            color: 'grey'
+            text: originalText,
+            color: 'lightgrey'
           }
         },
         {
-          type: 'regular',
+          type: 'error',
+          payload: {
+            text: 'So, you want to try to get into my secret_folder? I haven\'t implemented \
+                  it yet. Good for you though. This is pretty deep.'
+          }
+        }
+      ]
+      break;
+    case 'secret_folder':
+      response = [
+        {
+          type: 'enteredcommand',
+          payload: {
+            text: originalText,
+            color: 'lightgrey'
+          }
+        },
+        {
+          type: 'error',
+          payload: {
+            text: 'cd: secret_folder: Permission denied'
+          }
+        }
+      ]
+      break;
+    case 'chmod':
+    case 'cd':
+      response = [
+        // empty
+      ]
+      break;
+    case 'ls':
+      response = [
+        {
+          type: 'enteredcommand',
+          payload: {
+            text: 'ls',
+            color: 'lightgrey'
+          }
+        },
+        {
+          type: 'plain',
+          payload: {
+            text: 'secret_folder/',
+            color: 'grey'
+          }
+        }
+      ]
+      break;
+    case `'help'`:
+      response = [
+        {
+          type: 'enteredcommand',
+          payload: {
+            text: `'help'`,
+            color: 'lightlightgrey'
+          }
+        },
+        {
+          type: 'plain',
           payload: {
             text: 
               `Woops! You do not need to actually type the quotation marks when \
@@ -38,14 +122,14 @@ export const determineResponse = (payload: Payload) => {
     case 'experience':
       response = [
         {
-          type: 'regular',
+          type: 'enteredcommand',
           payload: {
             text: 'employment',
-            color: 'grey'
+            color: 'lightgrey'
           }
         },
         {
-          type: 'regular',
+          type: 'plain',
           payload: {
             text: 'To view the job responsibilities, please view on desktop.',
             color: 'lime'
@@ -62,8 +146,8 @@ export const determineResponse = (payload: Payload) => {
             text:
               `Developed extensive training framework for learning cybersecurity essentials.\
               Worked with modern Javascript libraries to create a responsive, accessible platform\
-              with customizable modules and a suite of module customization tools for hiring managers\
-              to personalize modules for their employees. Worked with state-of-the-art systems such as \
+              with customizable modules and a suite of module customization tools \
+              to personalize modules for specific companies. Worked with state-of-the-art systems such as \
               Docker, MongoDB, RabbitMQ to create and deploy production training modules and customization frameworks.`
           }
         },
@@ -76,11 +160,9 @@ export const determineResponse = (payload: Payload) => {
             dates: '2016-2018 (Current)',
             location: 'Pittsburgh, PA',
             text:
-              `Developed extensive training framework for learning cybersecurity essentials.\
-              Worked with modern Javascript libraries to create a responsive, accessible platform\
-              with customizable modules and a suite of module customization tools for hiring managers\
-              to personalize modules for their employees. Worked with state-of-the-art systems such as \
-              Docker, MongoDB, RabbitMQ to create and deploy production training modules and customization frameworks.`
+              `Started, directed, and developed a clothing brand, focusing on bringing out undiscovered art talents in \
+              the Pittsburgh community. Dealt with every aspect of the business from creating the website, \
+              handling clothing bulk orders, customer sales, marketing, design ideation, and raising money.`
           }
         },
         {
@@ -167,21 +249,21 @@ export const determineResponse = (payload: Payload) => {
     case 'projects':
       response = [
         {
-          type: 'regular',
+          type: 'enteredcommand',
           payload: {
             text: 'projects',
-            color: 'grey'
+            color: 'lightgrey'
           }
         },
         {
-          type: 'regular',
+          type: 'plain',
           payload: {
             text: 'NOTE: The projects listed below are either completed, works in progress, or abandoned. While not all of my projects are listed, the ones listed are those I consider to be my best efforts over the years.',
             color: 'darkorange'
           }
         },
         {
-          type: 'regular',
+          type: 'plain',
           payload: {
             text: 'To view the project, click the image.',
             color: 'lime'
@@ -265,28 +347,28 @@ export const determineResponse = (payload: Payload) => {
     case 'awards':
       response = [
         {
-          type: 'regular',
+          type: 'enteredcommand',
           payload: {
             text: 'awards',
-            color: 'grey'
+            color: 'lightgrey'
           }
         },
         {
-          type: 'regular',
+          type: 'plain',
           payload: {
             text: `NOTE: I think awards in general are subjective to the specific context and are not representative to a person's talent or merit. However, I am still proud of the projects I have created and the awards I have received for them.`,
             color: '#B00020'
           }
         },
         {
-          type: 'regular',
+          type: 'plain',
           payload: {
             text: '2nd Place @ SteelHacks 2017 - Developed a VR Unity FPS Video Game.',
             color: '#FFDE03'
           }
         },
         {
-          type: 'regular',
+          type: 'plain',
           payload: {
             text: '4nd Place @ SteelHacks 2016 - Developed a Tinder-inspired Restaurant Finder.',
             color: '#FFDE03'
@@ -301,10 +383,10 @@ export const determineResponse = (payload: Payload) => {
     case 'about me':
       response = [
         {
-          type: 'regular',
+          type: 'enteredcommand',
           payload: {
             text: 'about me',
-            color: 'grey'
+            color: 'lightgrey'
           }
         },
         {
@@ -342,10 +424,10 @@ export const determineResponse = (payload: Payload) => {
     case 'contact me':
       response = [
         {
-          type: 'regular',
+          type: 'enteredcommand',
           payload: {
             text: 'contact',
-            color: 'grey'
+            color: 'lightgrey'
           }
         },
         {
@@ -385,10 +467,10 @@ export const determineResponse = (payload: Payload) => {
     case 'ping':
       response = [
         {
-          type: 'regular',
+          type: 'enteredcommand',
           payload: {
             text: 'ping',
-            color: 'grey'
+            color: 'lightgrey'
           }
         },
         {
@@ -404,14 +486,14 @@ export const determineResponse = (payload: Payload) => {
     case 'help':
       response = [
         {
-          type: 'regular',
+          type: 'enteredcommand',
           payload: {
             text: 'help',
-            color: 'grey'
+            color: 'lightgrey'
           }
         },
         {
-          type: 'regular',
+          type: 'plain',
           payload: {
             text: 'Available Commands:',
             color: '#FFDE03'
