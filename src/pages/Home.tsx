@@ -32,6 +32,7 @@ class IHomePage extends React.Component<Props> {
       <div id='CMDWrapper' onClick={this.onWrapperClick}>
         <div id="CMDContainer">
           <IntroText color='#90ee02'>Nikush Dalia</IntroText>
+          <IntroText color='#90ee02'>nikushdalia@gmail.com</IntroText>
           <IntroText color='#aaf255'>Web Developer, Entrepreneur, Creative</IntroText>
           <IntroText color='#c6f68d'>Welcome To My Portfolio Website</IntroText>
           <IntroText color='#defabb'>Built in React, Redux, Typescript</IntroText>
